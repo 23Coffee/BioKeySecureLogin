@@ -104,19 +104,32 @@ const Login = () => { // Define Login component
             }
         }
     };
-
-    function handlelogin(e) { // Define function to handle login
-        // Biokey = (Sum of Dwell Times (DW) + Sum of Flight Times (FT)) / Number of keystroke (N)
+    function handlelogin(e) {
         e.preventDefault(); // Prevent default form submission behavior
-        let sum = keyevent.DT[keyevent.DT.length - 1]; // Get last dwell time
-        for (let i = 0; i < keyevent.TS.length; i++) { // Loop through type speeds
-            sum += keyevent.TS[i]; // Add type speed to sum
+        let sum = 0;
+        const numDwellFlight = keyevent.DT.length; // Number of keystrokes with dwell time and flight time
+        const numTypeSpeed = keyevent.TS.length; // Number of keystrokes with type speed
+        
+        // Calculate sum of dwell times and flight times
+        for (let i = 0; i < numDwellFlight; i++) {
+            sum += keyevent.DT[i] + keyevent.FT[i];
         }
-        let n = keyevent.TS.length + 1; // Calculate number of type speeds
-        user.userbiokey = sum / n; // Calculate and update user bio key
-        console.log("userbiokey ", user.userbiokey); // Log user bio key
+        
+        // Add sum of type speeds
+        for (let i = 0; i < numTypeSpeed; i++) {
+            sum += keyevent.TS[i];
+        }
+        
+        // Calculate total number of keystrokes
+        const totalKeystrokes = numDwellFlight + numTypeSpeed;
+        
+        // Calculate biokey
+        user.userbiokey = sum / totalKeystrokes;
+        
+        console.log("userbiokey", user.userbiokey); // Log user bio key
         handleRegister(e); // Call handleRegister function
     }
+    
 
     return (
         <div className="flex flex-col w-full max-w-md px-4 py-8 bg-gray-900 rounded-lg shadow sm:px-6 md:px-8 lg:px-10 text-white"> {/* Login form container"> {/* Login form container */}
@@ -133,7 +146,7 @@ const Login = () => { // Define Login component
                                     </path>
                                 </svg>
                             </span>
-                            <input type="text" id="sign-in-name" className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="username" value={user.username} onChange={e => handleChange('username', e)} placeholder="Your username" /> {/* Username input field */}
+                            <input type="text" id="sign-in-name" className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="username" value={user.username} onChange={e => handleChange('username', e)} placeholder="Enter your username" /> {/* Username input field */}
                         </div>
                     </div>
                     <div className="flex flex-col mb-6"> {/* Password field container */}
@@ -145,7 +158,7 @@ const Login = () => { // Define Login component
                                 </svg>
                             </span>
                             {/* Password Box*/}
-                            <input id="sign-in-password" className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="password" value={user.password} onChange={e => handleChange('password', e)} placeholder="Your password" /> {/* Password input field */}
+                            <input id="sign-in-password" className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="password" value={user.password} onChange={e => handleChange('password', e)} placeholder="Enter your password" /> {/* Password input field */}
                             {/* <input type="password" id="sign-in-password" class=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="password" value={user.password} onChange={captureInputEvent} placeholder="Your password" /> */}
                         </div>
                     </div>

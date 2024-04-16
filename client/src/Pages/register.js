@@ -25,7 +25,7 @@ const Register = () => {
         const isDataAvailable = !!(user.name && user.username && user.password && user.userbiokey && user.Threshold)
         if (isDataAvailable) {
             // Send a POST request to register the user
-            Axios.post("http://localhost:3001/register", user)
+            Axios.post("http://localhost:3000/register", user)
                 .then(res => alert("successful create"))
             // Redirect to login page
             window.href = "/login"
@@ -56,7 +56,7 @@ const Register = () => {
 
     return (
         <div class="flex flex-col w-full max-w-md px-4 py-8 bg-gray-900 rounded-lg shadow sm:px-6 md:px-8 lg:px-10 text-white">
-            <div class="self-center mb-2 text-xl font-bold sm:text-2xl text-white">
+            <div class="self-center mb-6 text-2xl font-bold sm:text-3xl">
                 Create a new account
             </div>
             
@@ -64,18 +64,18 @@ const Register = () => {
                 <form action="#" onSubmit={handleRegister}>
                     <div class="flex flex-col mb-2">
                         <div class=" relative ">
-                            <input type="text" id="create-account-name" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="name" value={user.name} onChange={e => handleChange("name", e)} placeholder="name" />
+                            <input type="text" id="create-account-name" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="name" value={user.name} onChange={e => handleChange("name", e)} placeholder="Enter name" />
                         </div>
                     </div>
                     <div class="flex flex-col mb-2">
                         <div class=" relative ">
-                            <input type="text" id="create-account-username" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="username" value={user.username} onChange={e => handleChange("username", e)} placeholder="username" />
+                            <input type="text" id="create-account-username" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="username" value={user.username} onChange={e => handleChange("username", e)} placeholder="Enter username" />
                         </div>
 
                     </div>
                     <div class="flex flex-col mb-2">
                         <div class=" relative ">
-                            <input id="create-password" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="password" value={user.password} onChange={e => handleChange("password", e)} placeholder="password" />
+                            <input id="create-password" class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="password" value={user.password} onChange={e => handleChange("password", e)} placeholder="Enter password" />
                         </div>
                     </div>
                     
