@@ -8,7 +8,7 @@ Develop a log-in screen to perform user authentication by using both password an
 3. The second one 'cd client'
 4. 'npm start' on both terminal
 
-# Running with MongoDB need administrator to add  the user's IP address to Network access for safty
+# Running with MongoDB need administrator to add  the user's IP address to Network access for safety
 Contact: pattaradai.kae@student.mahidol.ac.th
 
 
