@@ -6,10 +6,10 @@ const Register = () => {
         name: "",
         username: "",
         password: "",
-        userbiokey: 200, // Default user biokey
-        Threshold: null, // Threshold for password length
+        userbiokey: 200,
+        Threshold: null,
     })
-    // Function to handle changes in input fields
+
     const handleChange = (key, e) => {
         var value = e
         if (key !== "userbiokey" && key !== "Threshold") {
@@ -20,14 +20,12 @@ const Register = () => {
             [key]: value,
         })
     }
-    // Function to create a new user
+
     const onCreateUser = async() => {
         const isDataAvailable = !!(user.name && user.username && user.password && user.userbiokey && user.Threshold)
         if (isDataAvailable) {
-            // Send a POST request to register the user
-            Axios.post("http://localhost:3000/register", user)
+            Axios.post("http://localhost:3001/register", user)
                 .then(res => alert("successful create"))
-            // Redirect to login page
             window.href = "/login"
         }
         else {
@@ -35,10 +33,10 @@ const Register = () => {
         };
     }
 
-    // Function to handle user registration
+    //register function 
     const handleRegister = (e) => {
         e.preventDefault()
-        // Determine the threshold based on password length
+
         if (user.password.length > 7 && user.password.length < 11){ //8-10
             user.Threshold = 20
         } else if (user.password.length > 10 && user.password.length < 21){ //11-20
@@ -46,12 +44,9 @@ const Register = () => {
             user.Threshold = 30
         } else if (user.password.length > 20 && user.password.length < 31){ //21-30
             user.Threshold = 40
-        } else {
-            alert("Error: Password length should be between 8 to 30 characters.");
-            return;
         }
         console.log(user.Threshold); 
-        onCreateUser() // Call function to create user
+        onCreateUser()
     }
 
     return (
